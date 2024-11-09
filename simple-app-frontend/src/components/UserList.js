@@ -13,13 +13,19 @@ const UserList = () => {
   }, []);
 
   return (
-    <ul>
-      {users.map((user) => (
-        <li key={user._id}>
-          {user.firstName} {user.lastName} - {user.email}
-        </li>
-      ))}
-    </ul>
+    <div>
+      {users.length === 0 ? (
+        <p>No users found</p>
+      ) : (
+        <ul>
+          {users.map((user) => (
+            <li key={user._id}>
+              {user.firstName} {user.lastName} - {user.email}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 
