@@ -7,25 +7,31 @@ const UserList = () => {
   useEffect(() => {
     const getUsers = async () => {
       const data = await fetchUsers();
-      setUsers(data);
+      setUsers(Array.isArray(data) ? data : []);
+      console.log(users);
     };
     getUsers();
+    
   }, []);
 
   return (
     <div>
-      {users.length === 0 ? (
-        <p>No users found</p>
-      ) : (
-        <ul>
-          {users.map((user) => (
+    {Array.isArray(users) && users.length === 0 ? (
+      <p>No users found</p>
+    ) : (
+      <ul>
+        {Array.isArray(users) ? (
+          users.map((user) => (
             <li key={user._id}>
               {user.firstName} {user.lastName} - {user.email}
             </li>
-          ))}
-        </ul>
-      )}
-    </div>
+          ))
+        ) : (
+          <p>Error loading users</p>
+        )}
+      </ul>
+    )}
+  </div>
   );
 };
 
